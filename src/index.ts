@@ -14,21 +14,21 @@
  *   experimental Markdown conversion. If not set or set to any other value,
  *   all responses will be in JSON format regardless of the "format" parameter.
  */
-import yargs from "yargs";
-import { hideBin } from "yargs/helpers";
 import { startServer } from "./server/index.js";
 
 // Parse command line arguments
-const argv = yargs(hideBin(process.argv))
-  .option("enabledTools", {
-    type: "string",
-    description: "Comma-separated list of tools to enable",
-  })
-  .parseSync();
-
-const enabledToolsSet = new Set(
-  argv.enabledTools ? argv.enabledTools.split(",") : []
-);
+const enabledToolsSet = new Set([
+  "notion_retrieve_block",
+  "notion_retrieve_block_children",
+  "notion_retrieve_page",
+  "notion_query_database",
+  "notion_retrieve_database",
+  "notion_search",
+  "notion_list_all_users",
+  "notion_retrieve_user",
+  "notion_retrieve_bot_user",
+  "notion_retrieve_comments",
+]);
 
 // if test environment, do not execute main()
 if (process.env.NODE_ENV !== "test" && process.env.VITEST !== "true") {
